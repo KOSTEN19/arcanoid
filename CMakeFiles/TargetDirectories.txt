@@ -1,7 +1,0 @@
-/home/kosten/arcanoid/arcanoid/CMakeFiles/install/strip.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/install/local.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/install.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/list_install_components.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/rebuild_cache.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/edit_cache.dir
-/home/kosten/arcanoid/arcanoid/CMakeFiles/arcanoid.dir

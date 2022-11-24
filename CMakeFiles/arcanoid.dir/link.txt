@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/arcanoid.dir/main.o CMakeFiles/arcanoid.dir/game_logic.o  -o arcanoid 

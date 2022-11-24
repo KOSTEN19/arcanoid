@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 1.2)
+project(informatics LANGUAGES C)
+add_executable(arcanoid)
+target_sources(arcanoid PRIVATE arcanoid.h main.c game_logic.c)
+install(TARGETS arcanoid)

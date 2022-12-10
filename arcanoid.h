@@ -29,7 +29,10 @@ struct LevelData {
     int objects[(AREA_WIDTH-2) * (AREA_HEIGHT-10)];
 };
 
-void roundLoop(LevelData* levelData, HANDLE hConsole);
-
-BOOL ballCollide(Vector* position, Vector* direction, LevelData* levelData, RECT platform);
-void moveBall(Vector* position, Vector* direction, LevelData* levelData, RECT platform);
+BOOL roundLoop( HANDLE hConsole);
+int Level_arr[10][AREA_WIDTH][AREA_HEIGHT];
+int GAME_LEVEL ;
+int GAME_SCORE;
+int BLOCK_COUNT;
+BOOL ballCollide(Vector* position, Vector* direction,RECT platform);
+void moveBall(Vector* position, Vector* direction, RECT platform);

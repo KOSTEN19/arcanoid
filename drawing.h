@@ -5,6 +5,7 @@
 
 #define AREA_WIDTH 65
 #define AREA_HEIGHT 25
+#define BLOCK 4
 
 #define ESC "\x1b"
 #define CSI "\x1b["
@@ -24,13 +25,13 @@ int checkScreenChanged(HANDLE handle);
 void drawBox(int x, int y, int width, int height, BOOL shouldDrawBottom, char* color);
 void drawFilledBox(int x, int y, int width, int height, char* color);
 void drawText(int x, int y, const char* text);
-
+void drawNum(int x, int y, int text);
 void hideCursor();
 void showCursor();
 
 void setCursorPos(int x, int y);
 void clearCon();
-
+void drawLevel();
 void clearBox(int x, int y, int width, int height);
 
 void setDrawingColor(const char* color);

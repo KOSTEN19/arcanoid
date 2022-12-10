@@ -1,4 +1,5 @@
 #include "drawing.h"
+#include "arcanoid.h"
 int enableDrawMode(HANDLE handle)
 {
     if (handle == INVALID_HANDLE_VALUE) {
@@ -37,6 +38,7 @@ void clearCon() {
     printf(CSI "0J");
 }
 
+
 void onBuffer() {
     printf(CSI "?1049h");
 }
@@ -58,6 +60,39 @@ void resetColor()
 {
     printf(CSI "0m");
 }
+
+
+void drawLevel() {
+    //for (int h = 0; h < 10; ++h) {
+    //    for (int i = 0; i < AREA_HEIGHT; ++i) {
+    //        for (int j = 0; j < AREA_WIDTH; ++j) {
+   //             if (Level_arr[1][i][j] == 1) {
+    //                printf("%d %d %d\n", i, j, Level_arr[1][i][j]);
+   //             }
+  //          }
+  //      }
+  //  }
+  // Sleep(10000);
+    for (int i = 0; i < AREA_WIDTH; ++i) {
+        for (int j = 0; j < AREA_HEIGHT; ++j) {
+            if (Level_arr[GAME_LEVEL][i][j] == 1) {
+                setCursorPos(i, j);
+                //setDrawingColor(color);
+               
+                drawFilledBox(i, j, BLOCK, 1, PLATFORM_COLOR);
+                printf("%d %d", i, j);
+               
+           
+            }
+        }
+    }
+    
+
+
+}
+
+
+
 
 void drawBox(int x, int y, int width, int height, BOOL shouldDrawBottom, char* color)
 {
@@ -99,6 +134,12 @@ void drawText(int x, int y, const char* text)
     setCursorPos(x, y);
     printf(DRAW "B");
     printf("%s", text);
+}
+void drawNum(int x, int y, int text)
+{
+    setCursorPos(x, y);
+    printf(DRAW "B");
+    printf("%d", text);
 }
 
 void drawFilledBox(int x, int y, int width, int height, char* color)

@@ -7,7 +7,9 @@
 #endif
 
 #include "arcanoid.h"
-
+#include <time.h>
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 LevelData levels[] = {
         {{
            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -86,20 +88,66 @@ LevelData levels[] = {
          }},
         {{0, 0, 0, 1, 1, 1, 0, 0, 0, 2}}
 };
+void genarate_level() {
+    for (int h = 0; h < 10; ++h) {
+        for (int i = 0; i < AREA_HEIGHT; ++i) {
+            for (int j = 0; j < AREA_WIDTH; ++j) {
+                Level_arr[h][i][j] = 0;
+            }
+        }
+    }
 
+    int count = 0;
+
+    for (int h = 1; h < 11; ++h) {
+        while (count < h * 20) {
+            int x = 2+ rand() %58;
+            int y = 2+rand() % 13;
+
+            if (Level_arr[h][x][y] == 0) {
+                count++;
+                if( h==1)
+                printf("%d %d ", x, y);
+                Level_arr[h][x][y] = 1;
+            }
+          
+        }
+        count = 0;
+    }
+
+        for (int i = 0; i < AREA_WIDTH; ++i) {
+            for (int j = 0; j < AREA_HEIGHT; ++j) {
+                if (Level_arr[1][i][j] == 1)
+                    printf("%d %d\n", i, j);
+            }
+        }
+ //  Sleep(10000);
+
+}
 int main() {
+    srand(time(NULL));
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     if (!enableDrawMode(hConsole)) {
         printf("Failed to initialize drawing. Exit");
         return -1;
     }
+
+
     printf(SYS "0;Arcanoid" ESC "0x5C");
     clearCon();
     setDrawingColor(BORDER_COLOR);
     resetColor();
+    genarate_level();
+    GAME_LEVEL = 1;
+    GAME_SCORE = 0;
     onBuffer();
     hideCursor();
-    roundLoop(&levels[0], hConsole);
+    while (GAME_LEVEL<10){
+        BLOCK_COUNT = GAME_LEVEL * 20 ;
+        if (roundLoop(GAME_LEVEL, hConsole)) {
+            GAME_LEVEL++;
+        }
+    }
     offBuffer();
     showCursor();
     return 0;

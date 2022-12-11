@@ -77,8 +77,12 @@ BOOL roundLoop( HANDLE hConsole) {
         drawNum(AREA_WIDTH + +12, 4, GAME_SCORE);
         drawText(AREA_WIDTH + 3, 5, "LEVEL: ");
         drawNum(AREA_WIDTH +12, 5 ,GAME_LEVEL);
-        drawText(AREA_WIDTH + 3, 6, "LEADERBOARD:");
-        drawText(AREA_WIDTH + 3, 7, "IVAN   999999");
+        drawText(AREA_WIDTH + 3, 6, "LEADERBOARD TOP-10:");
+        for (int i = 0; i < 10; i++) {
+            drawText(AREA_WIDTH + 3, 7+i, SCOREBOARD[i].name);
+            drawNum(AREA_WIDTH + 10, 7 + i, SCOREBOARD[i].score);
+        }
+   //    drawText(AREA_WIDTH + 3, 17, "IVAN   999999");
         drawNum(AREA_WIDTH + 3, 8, BLOCK_COUNT);
         drawText(AREA_WIDTH + 3, AREA_HEIGHT + 1, "Press Q for autoplay");
 

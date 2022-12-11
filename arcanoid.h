@@ -23,6 +23,10 @@ struct SaveData {
     int score;
     char name[64];
 };
+struct user {
+    char* name;
+    int score;
+};
 
 typedef struct LevelData LevelData;
 struct LevelData {
@@ -38,5 +42,6 @@ int BLOCK_COUNT;
 int USERNAME_LEN;
 char* USERNAME;
 BOOL GAME_OVER;
+struct user SCOREBOARD[10];
 BOOL ballCollide(Vector* position, Vector* direction,RECT platform);
 void moveBall(Vector* position, Vector* direction, RECT platform);

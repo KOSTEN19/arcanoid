@@ -10,84 +10,7 @@
 #include <time.h>
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
-LevelData levels[] = {
-        {{
-           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-          0, 0
-         }},
-        {{0, 0, 0, 1, 1, 1, 0, 0, 0, 2}}
-};
+
 
 
 BOOL NOT_AROUND(int h,int x, int y) {
@@ -125,7 +48,7 @@ void genarate_level() {
         count = 0;
     }
 char* get_string(int* len, char rep ) {
-    printf("ENTER USERNAME:\n");
+    printf("ENTER USERNAME (5 chars):\n");
     *len = 0; 
     int capacity = 1; 
     char* s = (char*)malloc(sizeof(char)); 
@@ -133,7 +56,7 @@ char* get_string(int* len, char rep ) {
     char c = getchar(); 
 
  
-    while (c != rep) {
+    while (c!='\n') {
         s[(*len)++] = c; 
 
     
@@ -149,10 +72,8 @@ char* get_string(int* len, char rep ) {
 
     return s;
 }
-struct user {
-    char* name;
-    int score;
-};
+
+
 
 int main() {
     srand(time(NULL));
@@ -164,23 +85,35 @@ int main() {
 
 
    // printf(SYS "0;Arcanoid" ESC "0x5C");
-    USERNAME = get_string(&USERNAME_LEN, '\n');
+  
     clearCon();
     setDrawingColor(BORDER_COLOR);
     resetColor();
     genarate_level();
     GAME_LEVEL = 1;
+    USERNAME_LEN = 5;
     GAME_SCORE = 0;
     onBuffer();
     hideCursor();
-    struct user scoreboard[20];
-    FILE* score_board;
+    FILE  *score_board,*write_score;
     int score_board_len = 0;
+    int i = 0;
+    char name[5];
+    int score = 0;
     score_board = fopen("scoreboard.txt", "r");
-    while (fscanf(score_board, "%s%d",
-        scoreboard[score_board_len].name, &scoreboard[score_board_len].score != EOF)) {
-        score_board_len++;
+    while (!feof(score_board))
+    {   
+        fscanf(score_board, "%s %d", &name, &score);
+        SCOREBOARD[i].name = name;
+        SCOREBOARD[i].score = score;
+        i++;
+        printf("%s %d", name, score);
     }
+   // while (fscanf(score_board, "%s%d",
+  //      scoreboard[score_board_len].name, &scoreboard[score_board_len].score != EOF)) {
+  //      score_board_len++;
+  //  }
+    USERNAME = get_string(&USERNAME_LEN, '\n');
     while (GAME_LEVEL<10 && !GAME_OVER){
         genarate_level();
         BLOCK_COUNT = GAME_LEVEL * 5 ;
@@ -193,7 +126,7 @@ int main() {
             printf("%d", GAME_OVER);
             printf("GAME OVER TRY AGAIN?\n 1 - YES\n 0 - NO\n");
             scanf("%d", &choice);
-            clearCon();
+           
             if (choice) {
                 GAME_LEVEL = 1;
                 GAME_SCORE = 0;
@@ -202,7 +135,10 @@ int main() {
             
         }
     }
-
+   /// system("dir");
+    write_score = fopen("scoreboard.txt", "a");
+    fprintf(write_score, "%s %d\n", USERNAME, GAME_SCORE);
+    fclose(write_score);
     offBuffer();
     showCursor();
     return 0;

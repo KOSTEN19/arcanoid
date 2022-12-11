@@ -43,8 +43,9 @@ BOOL roundLoop( HANDLE hConsole) {
             return TRUE;
         }
       
-        if (ballPosition.y > AREA_HEIGHT) {
+        if (ballPosition.y >= AREA_HEIGHT) {
             clearCon();
+           
             return FALSE;
         }
         if (GetAsyncKeyState(0x51) && roundStarted) {
@@ -52,6 +53,7 @@ BOOL roundLoop( HANDLE hConsole) {
         }
         if (roundStarted) {
             clearBox(ballPosition.x, ballPosition.y, 1, 1);
+
             moveBall(&ballPosition, &ballDirection, platformPosition);
             if (autoplay) {
                 clearBox(platformPosition.left, platformPosition.top, platformWidth, 1);
@@ -67,10 +69,14 @@ BOOL roundLoop( HANDLE hConsole) {
 
         drawFilledBox(platformPosition.left, platformPosition.top, platformWidth, 1, PLATFORM_COLOR);
         drawText(ballPosition.x, ballPosition.y, "*");
-        drawLevel(GAME_LEVEL);
+        drawLevel();
         drawText(AREA_WIDTH + 3, 2, "ARKANOID v0.1");
+        drawText(AREA_WIDTH + 3, 3, "USERNAME: ");
+        drawText(AREA_WIDTH + 12, 3, USERNAME);
         drawText(AREA_WIDTH + 3, 4, "SCORE: ");
         drawNum(AREA_WIDTH + +12, 4, GAME_SCORE);
+        drawText(AREA_WIDTH + 3, 5, "LEVEL: ");
+        drawNum(AREA_WIDTH +12, 5 ,GAME_LEVEL);
         drawText(AREA_WIDTH + 3, 6, "LEADERBOARD:");
         drawText(AREA_WIDTH + 3, 7, "IVAN   999999");
         drawNum(AREA_WIDTH + 3, 8, BLOCK_COUNT);
@@ -79,51 +85,45 @@ BOOL roundLoop( HANDLE hConsole) {
         drawBox(1, 1, AREA_WIDTH, AREA_HEIGHT, FALSE, BORDER_COLOR);
         drawBox(AREA_WIDTH + 2, 1, 15, AREA_HEIGHT, TRUE, BORDER_COLOR);
 #ifdef WIN32
-        Sleep(1);
+        Sleep(100/GAME_LEVEL);
 #else
         sleep(0.001);
 #endif
     }
 }
-
+void dell_BLOCK(int x, int y) {
+    for (int i = -BLOCK; i <= BLOCK; i++) {
+        Level_arr[GAME_LEVEL][x + i][y] = 0;
+    }
+}
 BOOL is_goal_x( int x,int y) {
-    for (int i = 0; i <= 4; i++) {
-        if (Level_arr[GAME_LEVEL][x+i][y] == 1 || Level_arr[GAME_LEVEL][x-i][y] == 1) {
-            Level_arr[GAME_LEVEL][x+i][y] = 0;
-            Level_arr[GAME_LEVEL][x-i][y] = 0;
-            for (int i = 0; i <= 2; i++) {
-                for (int j = 0; j <= 2; j++) {
-                    Level_arr[GAME_LEVEL][x + i][y + j] = 0;
-                }
-            }
+    for (int i = -BLOCK; i <=BLOCK; i++) {
+        if (Level_arr[GAME_LEVEL][x+i][y] == 1) {
+            dell_BLOCK(x + i, y);
             BLOCK_COUNT--;
             GAME_SCORE += 10 * GAME_LEVEL;
             clearCon();
             return TRUE;
         }
-    }
-    return  FALSE;
+       
 
+    }
+    return FALSE;
 }
 BOOL is_goal_y(int x, int y) {
-    for (int i = 0; i <= 2; i++) {
-        if (Level_arr[GAME_LEVEL][x][y + i] == 1 || Level_arr[GAME_LEVEL][x][y - i] == 1) {
-            Level_arr[GAME_LEVEL][x][y + i] = 0;
-            Level_arr[GAME_LEVEL][x][y - i] = 0;
-            for (int i = 0; i <= 2; i++) {
-                for (int j = 0; j <= 2; j++) {
-                    Level_arr[GAME_LEVEL][x+i][y + j] = 0;
-
-                }
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -BLOCK; j <= BLOCK; j++) {
+            if (Level_arr[GAME_LEVEL][x + j][y + i] == 1) {
+                BLOCK_COUNT--;
+                dell_BLOCK(x + j, y+i);
+                GAME_SCORE += 10 * GAME_LEVEL;
+                clearCon();
+                return TRUE;
             }
-            BLOCK_COUNT--;
-            GAME_SCORE += 10 * GAME_LEVEL;
-            clearCon();
-            return TRUE;
-           
         }
+     
     }
-    return  FALSE;
+    return FALSE;
 
 }
 
@@ -138,17 +138,18 @@ BOOL ballCollide(Vector *position, Vector *direction,  RECT platform) {
             position->x + direction->x,
             position->y + direction->y
     };
+    BOOL BANG = FALSE;
  
         printf("%d %d", position->x, position->y);
         if (is_goal_x(predictedPosition.x, predictedPosition.y) || predictedPosition.x <= 1 || predictedPosition.x >= AREA_WIDTH ) {
             direction->x *= -1;
-                return TRUE;
+            BANG = TRUE;
         }
         if ((is_goal_y(predictedPosition.x, predictedPosition.y)) || predictedPosition.y <= 1 ||
             (predictedPosition.x >= platform.left - 1 && predictedPosition.x <= platform.right &&
                 predictedPosition.y >= platform.top) ) {
             direction->y *= -1;
-            return TRUE;
+            BANG = TRUE;
         }
-    return FALSE;
+    return BANG;
 }

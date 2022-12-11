@@ -5,7 +5,7 @@
 
 #define AREA_WIDTH 65
 #define AREA_HEIGHT 25
-#define BLOCK 4
+#define BLOCK 3
 
 #define ESC "\x1b"
 #define CSI "\x1b["
@@ -28,7 +28,7 @@ void drawText(int x, int y, const char* text);
 void drawNum(int x, int y, int text);
 void hideCursor();
 void showCursor();
-
+void drawLevel();
 void setCursorPos(int x, int y);
 void clearCon();
 void drawLevel();

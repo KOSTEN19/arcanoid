@@ -88,42 +88,72 @@ LevelData levels[] = {
          }},
         {{0, 0, 0, 1, 1, 1, 0, 0, 0, 2}}
 };
+
+
+BOOL NOT_AROUND(int h,int x, int y) {
+    for (int i = -BLOCK*2; i < BLOCK*2; i++) {
+        if (Level_arr[h][x + i][y] == 1)
+            return FALSE;
+    }
+    return TRUE;
+}
 void genarate_level() {
-    for (int h = 0; h < 10; ++h) {
+
         for (int i = 0; i < AREA_HEIGHT; ++i) {
             for (int j = 0; j < AREA_WIDTH; ++j) {
-                Level_arr[h][i][j] = 0;
+                Level_arr[GAME_LEVEL][i][j] = 0;
             }
         }
-    }
+
 
     int count = 0;
 
-    for (int h = 1; h < 11; ++h) {
-        while (count < h * 20) {
+
+        while (count < GAME_LEVEL * 5) {
             int x = 2+ rand() %58;
             int y = 2+rand() % 13;
 
-            if (Level_arr[h][x][y] == 0) {
+            if (Level_arr[GAME_LEVEL][x][y] == 0 && NOT_AROUND(GAME_LEVEL,x,y)) {
                 count++;
-                if( h==1)
-                printf("%d %d ", x, y);
-                Level_arr[h][x][y] = 1;
+                
+                
+             //   printf("%d %d ", x, y);
+                Level_arr[GAME_LEVEL][x][y] = 1;
             }
           
         }
         count = 0;
     }
+char* get_string(int* len, char rep ) {
+    printf("ENTER USERNAME:\n");
+    *len = 0; 
+    int capacity = 1; 
+    char* s = (char*)malloc(sizeof(char)); 
 
-        for (int i = 0; i < AREA_WIDTH; ++i) {
-            for (int j = 0; j < AREA_HEIGHT; ++j) {
-                if (Level_arr[1][i][j] == 1)
-                    printf("%d %d\n", i, j);
-            }
+    char c = getchar(); 
+
+ 
+    while (c != rep) {
+        s[(*len)++] = c; 
+
+    
+        if (*len >= capacity) {
+            capacity *= 2; 
+            s = (char*)realloc(s, capacity * sizeof(char)); 
         }
- //  Sleep(10000);
 
+        c = getchar();       
+    }
+
+    s[*len] = '\0'; 
+
+    return s;
 }
+struct user {
+    char* name;
+    int score;
+};
+
 int main() {
     srand(time(NULL));
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -133,7 +163,8 @@ int main() {
     }
 
 
-    printf(SYS "0;Arcanoid" ESC "0x5C");
+   // printf(SYS "0;Arcanoid" ESC "0x5C");
+    USERNAME = get_string(&USERNAME_LEN, '\n');
     clearCon();
     setDrawingColor(BORDER_COLOR);
     resetColor();
@@ -142,12 +173,36 @@ int main() {
     GAME_SCORE = 0;
     onBuffer();
     hideCursor();
-    while (GAME_LEVEL<10){
-        BLOCK_COUNT = GAME_LEVEL * 20 ;
-        if (roundLoop(GAME_LEVEL, hConsole)) {
+    struct user scoreboard[20];
+    FILE* score_board;
+    int score_board_len = 0;
+    score_board = fopen("scoreboard.txt", "r");
+    while (fscanf(score_board, "%s%d",
+        scoreboard[score_board_len].name, &scoreboard[score_board_len].score != EOF)) {
+        score_board_len++;
+    }
+    while (GAME_LEVEL<10 && !GAME_OVER){
+        genarate_level();
+        BLOCK_COUNT = GAME_LEVEL * 5 ;
+        GAME_OVER = !roundLoop(GAME_LEVEL, hConsole);
+        if(!GAME_OVER) {
             GAME_LEVEL++;
         }
+        else {
+            int choice = 0;
+            printf("%d", GAME_OVER);
+            printf("GAME OVER TRY AGAIN?\n 1 - YES\n 0 - NO\n");
+            scanf("%d", &choice);
+            clearCon();
+            if (choice) {
+                GAME_LEVEL = 1;
+                GAME_SCORE = 0;
+                GAME_OVER = FALSE;
+            }
+            
+        }
     }
+
     offBuffer();
     showCursor();
     return 0;

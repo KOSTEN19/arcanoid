@@ -75,7 +75,8 @@ void drawLevel() {
   // Sleep(10000);
     for (int i = 0; i < AREA_WIDTH; ++i) {
         for (int j = 0; j < AREA_HEIGHT; ++j) {
-            if (Level_arr[GAME_LEVEL][i][j] == 1) {
+
+            if (Level_arr[GAME_LEVEL][i][j] == 1 ) {
                 setCursorPos(i, j);
                 //setDrawingColor(color);
                
